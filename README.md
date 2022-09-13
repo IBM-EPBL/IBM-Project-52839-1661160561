@@ -7,13 +7,13 @@
 - Karuppasamy
 
 # Containment Zone Alerting Application
-## Category: Cloud App Development
+## Category: Cloud App Development <img src="https://media1.giphy.com/media/XFJdsVNbL5u8qvdj6s/giphy.gif?cid=ecf05e47kwl4ihcoglak9gqii0h0d6aj1n7erro9cyri6zrj&rid=giphy.gif&ct=s" width="30px">
 
 ## Skills Required:
 > IBM Cloud,HTML,Javascript,IBM Cloud Object Storage,Python-Flask,Kubernetes,Docker,IBM DB2,IBM Container Registry
 
 
-## Project Idea:
+## Project Idea: <img src="https://media2.giphy.com/media/i0HhgCcJE3GM8KGy4g/giphy.gif?cid=ecf05e47y8upop3gmngnos1u7hfqm8h6bpagzst3g7dhqixo&rid=giphy.gif&ct=s" width="30px">
    > This application is intended to provide information about containment zones in a particular region by alerting people, through continuous monitoring of an individual's location.  Key benefits of the application are monitoring people's activity and alerting them of their safety movements.
 
 ## Features of the Application
