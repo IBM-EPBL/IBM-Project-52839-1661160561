@@ -1,4 +1,0 @@
-1. List creation and modifications. Answer -> test1.py
-2. Create a calculator program in python. Answer -> calculator.py
-3. String concatination and slicing. Answer -> String.py
-4. Why python is a popular language
