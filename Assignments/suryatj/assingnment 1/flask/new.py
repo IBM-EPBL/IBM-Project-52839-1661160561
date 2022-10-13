@@ -12,6 +12,6 @@ def welcome():
         email = request.form['email']
         phone = request.form['phone']
        
-    return render_template('result.html',name=user,email=email,phone=phone)
+    return render_template('out.html',name=user,email=email,phone=phone)
 
 app.run(debug=True , port=8080)
