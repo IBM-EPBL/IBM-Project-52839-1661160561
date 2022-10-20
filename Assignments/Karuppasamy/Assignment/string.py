@@ -20,3 +20,4 @@ list1.pop()
 list1.reverse()
 
 print(list1)
+\
