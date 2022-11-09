@@ -53,7 +53,7 @@ def register():
             ibm_db.execute(prep_stmt)
             print("User created successfully")
             msg = 'You have successfully registered !'
-            return redirect(url_for('login', msg=msg))
+            return render_template('login.html', msg=msg)
 
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
@@ -92,7 +92,7 @@ def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
-    return render_template('home.html')
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
