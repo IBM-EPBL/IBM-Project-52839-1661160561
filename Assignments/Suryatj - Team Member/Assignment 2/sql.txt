@@ -1,0 +1,23 @@
+1. -- Create User table with user with email, username, roll number, password.
+CREATE TABLE patient (
+	username varchar(20),
+	email varchar(30),
+	rollnumber varchar(10),
+	passwrd varchar(15)
+);
+
+2. Perform UPDATE,DELETE Queries with user table
+
+ALTER TABLE
+  PATIENT
+  ADD AGE INT;
+
+INSERT
+  INTO PATIENT
+  VALUES(
+	'surya',
+	'surya12@gmail',
+	'0987',
+	'dfefsdde',
+	'21'
+);

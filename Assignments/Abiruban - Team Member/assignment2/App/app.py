@@ -4,14 +4,12 @@ import re
 
 app = Flask(__name__)
 app.secret_key = 'secret'
-conn = ibm_db.connect(
-    "DATABASE=bludb;"
-    "HOSTNAME=6667d8e9-9d4d-4ccb-ba32-21da3bb5aafc.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;"
-    "PORT=30376;SECURITY=SSL;"
+conn = ibm_db.connect("DATABASE=bludb;"
+    "HOSTNAME=b0aebb68-94fa-46ec-a1fc-1c999edb6187.c3n41cmd0nqnrk39u98g.databases.appdomain.cloud;"
+    "PORT=31249;SECURITY=SSL;"
     "SSLServerCertificate=DigiCertGlobalRootCA.crt;"
-    "PROTOCOL=TCPIP;"
-    "UID=ywf94293;"
-    "PWD=soBm6H5RCfodjrea", "", "")
+    "UID=djy71776;"
+    "PWD=cN0mtNWCl6VCBoQ1", "", "")
 
 print("Connected to database: ", conn)
 print("Connection successful.")
