@@ -1,10 +1,10 @@
 # create a flask app
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import ibm_db
 import re
 
 app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
-
+app.secret_key = 'sus'
 conn = ibm_db.pconnect("DATABASE=BLUDB;"
                        "HOSTNAME=54a2f15b-5c0f-46df-8954-7e38e612c2bd.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;"
                        "PORT=32733;"
@@ -16,6 +16,8 @@ conn = ibm_db.pconnect("DATABASE=BLUDB;"
                        "", "", "")
 
 print("Connected to database", conn)
+
+session = {}
 
 
 # create a route for the home page
@@ -78,7 +80,8 @@ def login():
         result = ibm_db.fetch_assoc(stmt)
         # print("result", result)
         if result:
-            message = 'You have successfully logged in!'
+            # message = 'You have successfully logged in!'
+            session['username'] = name
             return redirect(url_for('home'))
         else:
             message = 'The email or password is incorrect!'
@@ -87,12 +90,17 @@ def login():
 
 @app.route('/logout')
 def logout():
-    return redirect(url_for('register'))
+    session.clear()
+    return redirect(url_for('login'))
 
 
+# create a route for the home page and open only if the user is logged in
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    if 'username' in session:
+        return render_template('home.html')
+    else:
+        return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
