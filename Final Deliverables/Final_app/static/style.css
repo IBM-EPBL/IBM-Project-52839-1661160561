@@ -181,3 +181,150 @@ h1 {
 p{
     text-align: center;
 }
+
+
+//move the logout form to the right corner and design the form
+//display the h1 and logout form in the center
+
+.logout {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.logout input[type="submit"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout input[type="submit"]:hover {
+    background-color: #e6e6e6;
+}
+
+
+//display the h1 and logout form in the center
+
+.logout {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.logout form {
+    float: right;
+    margin-right: 20px;
+}
+
+.logout form input[type="submit"] {
+    background-color: #333;
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout form input[type="submit"]:hover {
+    background-color: #444;
+}
+
+//display the dashboard in the center and design the form to center
+
+.dashboard {
+    width: 500px;
+    margin: 0 auto;
+}
+//display the dashboard form center
+//design the input form and textarea form small
+
+.dashboard form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.dashboard form input[type="text"],
+
+.dashboard form textarea {
+    width: 80;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+}
+
+//center the form
+
+.dashboard form input[type="submit"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dashboard form input[type="submit"] {
+
+    width: 100px;
+    padding: 0.5em;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dashboard form input[type="submit"]:hover {
+    background-color: #e6e6e6;
+}
+
+.dashboard form input[type="submit"]:hover {
+    background-color: #e6e6e6;
+}
+
+.dashboard form .error {
+    color: #ff0000;
+    margin-bottom: 0.5em;
+}
+
+.dashboard form .success {
+    color: #00ff00;
+    margin-bottom: 0.5em;
+}
+
+
+
+
+
+
+.dashboard form input[type="submit"] {
+    background-color: #333;
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard form input[type="submit"]:hover {
+    background-color: #444;
+}
+
+
+
+
+
+
+

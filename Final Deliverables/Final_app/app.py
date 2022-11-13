@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import ibm_db
 import re
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 
 conn = ibm_db.pconnect("DATABASE=BLUDB;"
                        "HOSTNAME=54a2f15b-5c0f-46df-8954-7e38e612c2bd.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud;"
@@ -79,7 +79,7 @@ def login():
         # print("result", result)
         if result:
             message = 'You have successfully logged in!'
-            return render_template('login.html', message=message)
+            return redirect(url_for('home'))
         else:
             message = 'The email or password is incorrect!'
     return render_template('login.html', message=message)
@@ -88,6 +88,11 @@ def login():
 @app.route('/logout')
 def logout():
     return redirect(url_for('register'))
+
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 
 if __name__ == '__main__':
