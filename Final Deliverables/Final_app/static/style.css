@@ -1,0 +1,183 @@
+body {
+    background-color: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 2.5em;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+.form_div  {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.form_div label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form_div input[type="text"],
+.form_div input[type="email"],
+.form_div input[type="password"],
+.form_div textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+
+.form_div input[type="submit"] {
+    background-color: #333;
+    border: 0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form_div input[type="submit"]:hover {
+    background-color: #444;
+}
+
+.form_div .error {
+    color: #ff0000;
+    margin-bottom: 0.5em;
+}
+
+.form_div .success {
+    color: #00ff00;
+    margin-bottom: 0.5em;
+}
+
+.form_div .error input[type="text"],
+.form_div .error input[type="email"],
+.form_div .error input[type="password"],
+.form_div .error textarea {
+    border: 1px solid #ff0000;
+}
+
+.form_div .success input[type="text"],
+.form_div .success input[type="email"],
+.form_div .success input[type="password"],
+.form_div .success textarea {
+    border: 1px solid #00ff00;
+}
+
+.form_div .error input[type="submit"] {
+    background-color: #ff0000;
+}
+
+.form_div .success input[type="submit"] {
+    background-color: #00ff00;
+}
+
+.form_div .error input[type="submit"]:hover {
+    background-color: #ff4444;
+}
+
+.form_div textarea {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+}
+/* center the form */
+
+.form_div {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.form_div input[type="submit"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form_div input[type="submit"]:hover {
+    background-color: #e6e6e6;
+}
+
+.form_div .error {
+    color: #ff0000;
+    margin-bottom: 0.5em;
+}
+
+.form_div .success {
+    color: #00ff00;
+    margin-bottom: 0.5em;
+}
+
+.form_div .error input[type="text"],
+.form_div .error input[type="email"],
+.form_div .error input[type="password"],
+
+.form_div .error textarea {
+    border: 1px solid #ff0000;
+}
+
+.form_div .success input[type="text"],
+
+h1 {
+    font-size: 2.5em;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+/* submit button design */
+
+.form_div input[type="submit"] {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5em;
+    background-color: blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form_div input[type="submit"]:hover {
+    background-color: #0000FF80;
+}
+
+.form_div .error {
+    color: #ff0000;
+    margin-bottom: 0.5em;
+}
+
+.form_div .success {
+    color: #00ff00;
+    margin-bottom: 0.5em;
+}
+
+.form_div .error input[type="text"],
+.form_div .error input[type="email"],
+.form_div .error input[type="password"],
+.form_div .error textarea {
+    border: 1px solid #ff0000;
+}
+
+p{
+    text-align: center;
+}
