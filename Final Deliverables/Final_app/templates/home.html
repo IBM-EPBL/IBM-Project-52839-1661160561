@@ -10,28 +10,21 @@
             <input type="submit" value="Logout">
         </form>
     <h1>Dashboard</h1>
+    <h3>Welcome, {{name}}🎉</h3>
      </div>
     <div class="dashboard">
         <!--        create a dashboard for covid containment zone with map feature and inputs for user latitude and longitude-->
         <form action="/home" method="GET">
-            <input type="text" name="latitude" placeholder="Enter your latitude"><br>
-            <input type="text" name="longitude" placeholder="Enter your longitude"><br>
-            <input type="submit" value="locate">
+            <input type="text" name="latitude" placeholder="Enter your place"><br>
+            <input type="text" name="longitude" placeholder="Enter your coordinates"><br>
+            <input type="submit" value="Update">
         </form>
 
-        <div id="map"></div>
-        <!--        python api for map and map picker-->
-        <script>
-            function initMap() {
-                var uluru = {lat: 28.7041, lng: 77.1025};
-                var map = new google.maps.Map(
-                    document.getElementById('map'), {zoom: 4, center: uluru});
-                var marker = new google.maps.Marker({position: uluru, map: map});
-            }
-            initMap();
-        </script>
+        <div id="map">
 
-        <!--        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7856.950753655254!2d78.08809187243907!3d10.06007888515146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00b7edfef2a031%3A0xc1a0aa016a7c4367!2sUrseri%2C%20Tamil%20Nadu%20625501!5e0!3m2!1sen!2sin!4v1668357530144!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+        </div>
+
+        <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7856.950753655254!2d78.08809187243907!3d10.06007888515146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00b7edfef2a031%3A0xc1a0aa016a7c4367!2sUrseri%2C%20Tamil%20Nadu%20625501!5e0!3m2!1sen!2sin!4v1668357530144!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
 
     </div>
     </body>
