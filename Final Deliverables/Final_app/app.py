@@ -16,7 +16,7 @@ conn = ibm_db.pconnect("DATABASE=BLUDB;"
                        "SSLServerCertificate=DigiCertGlobalRootCA.crt;"
                        "", "", "")
 
-print("Connected to database", conn)
+# print("Connected to database", conn)
 
 session = {}
 
