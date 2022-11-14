@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+    <h1>Registration</h1>
+    <p>{{message}}</p>
+    <div class="form_div">
+        <form action="/" method="POST">
+            <input type="text" name="username" placeholder="Enter your username"><br>
+            <input type="text" name="email" placeholder="Enter your email"><br>
+            <input type="password" name="password" placeholder="Enter your password"><br>
+            <input type="password" name="confirm_password" placeholder="Confirm your password"><br>
+            <input type="submit" value="Register">
+        </form>
+<!--        create a login field for existing user-->
+        <form action="{{url_for('login')}}" method="GET">
+            <p>Already have an account?</p>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    </body>
+</html>
