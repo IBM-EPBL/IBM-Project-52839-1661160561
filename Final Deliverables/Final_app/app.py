@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import ibm_db
 import re
+import json
 
 app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
 app.secret_key = 'sus'
@@ -97,8 +98,10 @@ def logout():
 # create a route for the home page and open only if the user is logged in
 @app.route('/home')
 def home():
+    name = session['username']
+    # print(name)
     if 'username' in session:
-        return render_template('home.html')
+        return render_template('home.html', name=name)
     else:
         return redirect(url_for('login'))
 
