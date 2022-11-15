@@ -1,9 +1,7 @@
 # create a flask app
-from flask import Flask, render_template, request, redirect, url_for, session
+import re
 import ibm_db
-import ibm_db_dbi as db2
-from prettytable import from_db_cursor
-import re, requests, json
+from flask import Flask, render_template, request, redirect, url_for, session
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -43,10 +41,6 @@ def sendemail(mail):
         print(response.headers)
     except Exception as e:
         print(e.message)
-
-
-# send email to the user
-# sendemail("suryatj1234@gmail.com")
 
 
 # create a route for the home page
