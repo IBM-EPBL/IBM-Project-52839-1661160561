@@ -125,7 +125,10 @@ def logout():
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     # print(name)
+
     if 'id' in session:
+        if request.method == 'GET':
+            return render_template('home.html', name=session['username'])
         if request.method == "POST":
             # get data
             lat = request.form["lat"]

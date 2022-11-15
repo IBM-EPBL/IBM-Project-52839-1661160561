@@ -3,21 +3,35 @@
     <head>
         <title>Dashboard</title>
         <link rel="stylesheet" href="static/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
         <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--    <title>Document</title>-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"-->
-<!--        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <style>
+
         body {
             padding-top: 30px;
             padding-bottom: 30px;
-            background-color: aqua;
+            background-color: #0C1017;
+            color : #F0F6FC;
+            font-family: 'Open Sans', sans-serif;
+            padding: 30px;
         }
+
+        .m-3 float-right {
+            background-color : #0C1017;
+
+        }
+
         a {
-            color: black;
+            color: #F0F6FC;
+
         }
+<!--        design the whole html page to beautify-->
 
 
     </style>
@@ -27,7 +41,7 @@
     <script>
         alert("Location Uploaded Successfully");
     </script>
-    {% elif not success %}
+     {% elif not success %}
     <script>
         alert("Enter Proper Location data");
     </script>
@@ -39,7 +53,7 @@
         <h1>Declare Containment Zone</h1>
     </div>
 
-        <h3>Welcome: {{name}}</h3>
+        <h2>Welcome: {{name}}</h2>
 
     <form method="POST" action="/home">
         <div class="container">
