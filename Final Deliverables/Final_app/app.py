@@ -34,7 +34,7 @@ def sendemail(mail):
                      '<p>Thank you</p><br>'
                      '<p>Team Cautious Alert</p>')
     try:
-        sg = SendGridAPIClient('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')
+        sg = SendGridAPIClient('your api key')  # api key hidden
         response = sg.send(message)
         print(response.status_code)
         print(response.body)
