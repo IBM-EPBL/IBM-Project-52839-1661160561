@@ -83,6 +83,7 @@ public class SignUp extends AppCompatActivity {
                         editor.putString("email", email);
                         editor.putInt("id", userId );
                         editor.commit();
+                        System.out.println("The user id is : "+name+" "+email+" "+userId);
                         Intent intent = new Intent(SignUp.this,MainActivity.class);
                         startActivity(intent);
 

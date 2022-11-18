@@ -6,12 +6,35 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".MainActivity"
-    android:background="#699cc5">
+    android:background="#CE93D8">
+
+<!--    create a textview for title with good design-->
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/carter_one"
+        android:padding="10dp"
+        android:text="Your Co-ordinate"
+        android:textColor="#000000"
+        android:textSize="30sp" />
+
+    <TextView
         android:id="@+id/location_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/open_sans_condensed_bold"
+        android:padding="10dp"
+        android:text="Latitude: 0.0, Longitude: 0.0"
+        android:textAlignment="center"
         android:textColor="@color/black"></TextView>
 
 

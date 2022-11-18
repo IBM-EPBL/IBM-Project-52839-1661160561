@@ -52,7 +52,7 @@ public class MyLocationService extends BroadcastReceiver {
                         Toast.makeText(context, loc, Toast.LENGTH_SHORT).show();
                     }catch (Exception ex){
                         Toast.makeText(context,loc,Toast.LENGTH_SHORT).show();
-//                        postDataUsingVolley(Double.toString(location.getLatitude()),Double.toString(location.getLongitude()),context);
+                        postDataUsingVolley(Double.toString(location.getLatitude()),Double.toString(location.getLongitude()),context);
                     }
                 }
             }
@@ -67,35 +67,34 @@ public class MyLocationService extends BroadcastReceiver {
         RequestFuture<JSONArray> requestFuture= RequestFuture.newFuture();
         String url = "http://192.168.43.234:5000/location_data";
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        for (int locationIndex = 0; locationIndex < response.length(); locationIndex++) {
-                            try {
-                                JSONObject j = response.getJSONObject(locationIndex);
-                                Location l = new Location("");
-                                l.setLatitude(new Double(j.getString("location_lat")));
-                                l.setLongitude(new Double(j.getString("location_long")));
-                                int locationId = j.getInt("location_id");
-                                Double latitude  = Double.parseDouble(sharedPreferences.getString("latitudeVisited","0"));
-                                Double longitude = Double.parseDouble(sharedPreferences.getString("longitudeVisited","0"));
-                                Location alreadyVisited = new Location("");
-                                alreadyVisited.setLongitude(longitude);
-                                alreadyVisited.setLatitude(latitude);
-                                if(l.distanceTo(alreadyVisited) != 0){
-                                    float distanceInMeters = l.distanceTo(location);
-                                    Log.d("dis",String.valueOf(distanceInMeters));
-                                    if(distanceInMeters < 100){
-                                        sendMailUsingVolley(context,locationId);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putString("latitudeVisited", Double.toString(l.getLatitude()));
-                                        editor.putString("longitudeVisited", Double.toString(l.getLongitude()));
-                                        editor.commit();
-                                    }
+                response -> {
+                    for (int locationIndex = 0; locationIndex < response.length(); locationIndex++) {
+                        try {
+                            JSONObject j = response.getJSONObject(locationIndex);
+                            Location l = new Location("");
+                            l.setLatitude(new Double(j.getString("LOCATE_LAT")));
+                                l.setLongitude(new Double(j.getString("LOCATE_LANG")));
+                            int locationId = j.getInt("LOCATE_ID");
+                            Double latitude  = Double.parseDouble(sharedPreferences.getString("visited","0"));
+                            Double longitude = Double.parseDouble(sharedPreferences.getString("visited","0"));
+                            Location alreadyVisited = new Location("");
+                            alreadyVisited.setLongitude(longitude);
+                            alreadyVisited.setLatitude(latitude);
+                            if(l.distanceTo(alreadyVisited) != 0){
+                                float distanceInMeters = l.distanceTo(location);
+                                Log.d("dis",String.valueOf(distanceInMeters));
+                                if(distanceInMeters < 100){
+//                                    create a toast message to warn the user
+                                    Toast.makeText(context,"You are near a location with covid-19 cases",Toast.LENGTH_LONG).show();
+                                    sendMailUsingVolley(context,locationId);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("latitudeVisited", Double.toString(l.getLatitude()));
+                                    editor.putString("longitudeVisited", Double.toString(l.getLongitude()));
+                                    editor.commit();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 },
@@ -124,21 +123,25 @@ public class MyLocationService extends BroadcastReceiver {
 
         queue.add(jsonObjReq);
     }
+
     private void sendMailUsingVolley(Context context,int locationId) {
         final RequestQueue queue = Volley.newRequestQueue(context);
         String url = "http://192.168.43.234:5000/send_trigger";
         SharedPreferences sharedPreferences = context.getSharedPreferences("user_data", 0);
-        String email = sharedPreferences.getString("email","null");
+//        getting user email from shared preferences
+        String email = sharedPreferences.getString("email","");
         JSONObject postparams = new JSONObject();
+        System.out.println("The email is : "+email);
         try {
             postparams.put("email", email);
-            postparams.put("id",locationId);
+            postparams.put("id", locationId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, postparams,
 
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, postparams,
 
                 response -> Log.d("response",response.toString()),
                 error -> Log.d("error",error.toString()));

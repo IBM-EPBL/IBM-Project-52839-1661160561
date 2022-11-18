@@ -1,4 +1,5 @@
 # create a flask app
+import os
 import re
 import ibm_db
 from flask import *
@@ -21,6 +22,8 @@ conn = ibm_db.pconnect("DATABASE=BLUDB;"
 # print("Connected to database", conn)
 
 session = {}
+# import sendgrid environment variables
+api_key = os.environ.get('API_KEY')
 
 
 # route for sending email
@@ -35,13 +38,42 @@ def sendemail(mail):
                      '<p>Thank you</p><br>'
                      '<p>Team Cautious Alert</p>')
     try:
-        sg = SendGridAPIClient('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')
+        sg = SendGridAPIClient(api_key)
         response = sg.send(message)
         print(response.status_code)
         print(response.body)
         print(response.headers)
     except Exception as e:
         print(e.message)
+
+
+# create a sent email function using sendinblue
+# def sendemail(email):
+#     url = "https://api.sendinblue.com/v3/smtp/email"
+#     payload = {
+#         "sender": {
+#             "name": "Name",
+#             "email": "aswin@smartinternz.com"
+#         },
+#         "to": [
+#             {
+#                 "email": email,
+#                 "name": 'Hey User!'
+#             }
+#         ],
+#         "subject": "Cautious Alert",
+#         "htmlContent": "<h1>You are entering into contaminated zone!!</h1>"
+#                        "<p>Stay safe and take necessary precautions</p><br>"
+#                        "<p>Thank you</p><br>"
+#                        "<p>Team Cautious Alert</p>",
+#     }
+#     headers = {
+#         'accept': "application/json",
+#         'content-type': "application/json",
+#         'api-key': api_key
+#     }
+
+# sendemail('aswin2kumarforme.edu@gmail.com')
 
 
 # create a route for the home page
@@ -79,7 +111,8 @@ def register():
             if result:
                 message = 'The username or email already exists!'
             else:
-                sql = "INSERT INTO users (id, username, email, password,type) VALUES (seq_person.nextval,'" + name + "', '" + email + "', '" + password + "', 1)"
+                sql = "INSERT INTO users (id, username, email, password,type) VALUES (seq_person.nextval,'" + name + \
+                      "', '" + email + "', '" + password + "', 1) "
                 ibm_db.exec_immediate(conn, sql)
                 'You have successfully registered!'
                 return redirect(url_for('login'))
@@ -138,7 +171,8 @@ def home():
                 return render_template('home.html', name=session['username'], email=session['email'], id=session['id'],
                                        success=0)
             #         create a query to insert the data into the database
-            sql = "INSERT INTO inf_location (locate_id, locate_lat, locate_lang, visited) VALUES (seq_loc.nextval,'" + lat + "', '" + lon + "', 0)"
+            sql = "INSERT INTO inf_location (locate_id, locate_lat, locate_lang, visited) VALUES (seq_loc.nextval,'" \
+                  + lat + "', '" + lon + "', 0)"
             #         execute the query
             ibm_db.exec_immediate(conn, sql)
             return render_template('home.html', name=session['username'], email=session['email'], id=session['id'],
@@ -190,9 +224,11 @@ def android_signup():
             result = ibm_db.fetch_assoc(stmt)
             # print("result", result)
             if result:
-                return {"status": "failed", "message": "The username or email already exists!"}
+                return jsonify({"message": "The username or email already exists!"})
+
             else:
-                sql = "INSERT INTO users (id, username, email, password,type) VALUES (seq_person.nextval,'" + name + "', '" + email + "', '" + password + "', 2) "
+                sql = "INSERT INTO users (id, username, email, password,type) VALUES (seq_person.nextval,'" + name + \
+                      "', '" + email + "', '" + password + "', 2) "
                 ibm_db.exec_immediate(conn, sql)
                 # pass the id of the user to the android app
                 sql = "SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'"
@@ -232,7 +268,9 @@ def post_user_location_data():
     id1 = request.json["id"]
     ts = request.json['timestamp']
     #         create a query to insert the data into the database
-    sql = "INSERT INTO location (LOCATE_LAT, LOCATE_LONG, USER_ID, TIME_STAMP) VALUES ('" + lat + "', '" + lon + "', '" + str(id1) + "', '" + ts + "')"
+    sql = "INSERT INTO location (LOCATE_LAT, LOCATE_LONG, USER_ID, TIME_STAMP) VALUES ('" + lat + "', '" + lon + "', '"\
+        \
+          + str(id1) + "', '" + ts + "')"
     #         execute the query
     ibm_db.exec_immediate(conn, sql)
     return {"status": "success", "message": "You have successfully registered!"}
@@ -241,7 +279,7 @@ def post_user_location_data():
 @app.route("/location_data")
 def location_data():
     # create a query to fetch the data from the database
-    sql = "SELECT * FROM location"
+    sql = "SELECT * FROM inf_location"
     stmt = ibm_db.exec_immediate(conn, sql)
     # print("stmt", stmt)
     # fetch all the data from the database and store it in the result dictionary
@@ -253,7 +291,9 @@ def location_data():
     while result:
         data.append(result)
         ibm_db.fetch_assoc(stmt)
+        # print(data)
         return json.dumps(data)
+
     else:
         return {"response": "failure"}
 
@@ -291,19 +331,23 @@ def send_trigger():
         # get the data from the form
         email = request.json['email']
         location_id = request.json['id']
+        # print("email and loc", email, location_id)
         # get location data
-        sql = "SELECT VISITED FROM INF_LOCATION WHERE LOCATE_ID = '" + location_id + "'"
+        sql = "SELECT VISITED FROM INF_LOCATION WHERE LOCATE_ID = '" + str(location_id) + "'"
         stmt = ibm_db.exec_immediate(conn, sql)
+        print("stmt", stmt)
         if stmt:
             result = ibm_db.fetch_assoc(stmt)
             if result:
                 visited = result['VISITED']
                 visited = visited + 1
-                sql = "UPDATE INF_LOCATION SET VISITED = '" + str(visited) + "' WHERE LOCATE_ID = '" + location_id + "'"
+                sql = "UPDATE INF_LOCATION SET VISITED = '" + str(visited) + "' WHERE LOCATE_ID = '" + str(
+                    location_id) + "'"
                 ibm_db.exec_immediate(conn, sql)
-                print("updated", visited)
-                print("updated", location_id)
+
+                ibm_db.exec_immediate(conn, sql)
                 # send email
+                # print("email ->", email)
                 sendemail(email)
                 return {"response": "Mail success"}
             else:
@@ -311,4 +355,4 @@ def send_trigger():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
