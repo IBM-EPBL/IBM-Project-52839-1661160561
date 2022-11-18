@@ -2,6 +2,7 @@
 import os
 import re
 import ibm_db
+import requests
 from flask import *
 from glances.globals import json_dumps
 from sendgrid import SendGridAPIClient
@@ -24,6 +25,7 @@ conn = ibm_db.pconnect("DATABASE=BLUDB;"
 session = {}
 # import sendgrid environment variables
 api_key = os.environ.get('API_KEY')
+api_key2 = os.environ.get('API2')
 
 
 # route for sending email
@@ -48,35 +50,34 @@ def sendemail(mail):
 
 
 # create a sent email function using sendinblue
-# def sendemail(email):
-#     url = "https://api.sendinblue.com/v3/smtp/email"
-#     payload = {
-#         "sender": {
-#             "name": "Name",
-#             "email": "aswin@smartinternz.com"
-#         },
-#         "to": [
-#             {
-#                 "email": email,
-#                 "name": 'Hey User!'
-#             }
-#         ],
-#         "subject": "Cautious Alert",
-#         "htmlContent": "<h1>You are entering into contaminated zone!!</h1>"
-#                        "<p>Stay safe and take necessary precautions</p><br>"
-#                        "<p>Thank you</p><br>"
-#                        "<p>Team Cautious Alert</p>",
-#     }
-#     headers = {
-#         'accept': "application/json",
-#         'content-type': "application/json",
-#         'api-key': api_key
-#     }
+def send_conf_email(email):
+    url = "https://api.sendinblue.com/v3/smtp/email"
+    payload = {
+        "sender": {
+            "name": "Aswin Kumar",
+            "email": "aswin@smartinternz.com"
+        },
+        "to": [
+            {
+                "email": email,
+                "name": 'Hey'
+            }
+        ],
+        "subject": "Confirming Registration",
+        "htmlContent": "<h1>Thank you for registering with us</h1>"
+                       "<p>Stay safe and take necessary precautions</p><br>"
+                       "<p>Thank you</p><br>"
+                       "<p>Team Cautious Alert</p>",
+    }
+    headers = {
+        'accept': "application/json",
+        'content-type': "application/json",
+        'api-key': api_key2
+    }
+    response = requests.request("POST", url, data=json.dumps(payload), headers=headers)
+    print(response.text)
 
-# sendemail('aswin2kumarforme.edu@gmail.com')
 
-
-# create a route for the home page
 @app.route('/', methods=['GET', 'POST'])
 def register():
     message = ''
@@ -114,7 +115,8 @@ def register():
                 sql = "INSERT INTO users (id, username, email, password,type) VALUES (seq_person.nextval,'" + name + \
                       "', '" + email + "', '" + password + "', 1) "
                 ibm_db.exec_immediate(conn, sql)
-                'You have successfully registered!'
+                # send confirmation email
+                send_conf_email(email)
                 return redirect(url_for('login'))
         else:
             message = 'The email is invalid!'
@@ -268,9 +270,8 @@ def post_user_location_data():
     id1 = request.json["id"]
     ts = request.json['timestamp']
     #         create a query to insert the data into the database
-    sql = "INSERT INTO location (LOCATE_LAT, LOCATE_LONG, USER_ID, TIME_STAMP) VALUES ('" + lat + "', '" + lon + "', '"\
-        \
-          + str(id1) + "', '" + ts + "')"
+    sql = "INSERT INTO location (LOCATE_LAT, LOCATE_LONG, USER_ID, TIME_STAMP) VALUES ('" + lat + "', '" + lon + "', '" + str(
+        id1) + "', '" + ts + "')"
     #         execute the query
     ibm_db.exec_immediate(conn, sql)
     return {"status": "success", "message": "You have successfully registered!"}
